@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText usernameEditText = findViewById(R.id.editText_email);
         final EditText passwordEditText = findViewById(R.id.editText_password);
         final Button loginButton = findViewById(R.id.button_login);
-        final ProgressBar loadingProgressBar = findViewById(R.id.login_progress);
+//        final ProgressBar loadingProgressBar = findViewById(R.id.login_progress);
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -136,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
+//                loadingProgressBar.setVisibility(View.VISIBLE);
 //                loginViewModel.login(usernameEditText.getText().toString(),
 //                        passwordEditText.getText().toString());
                 String email2 = usernameEditText.getText().toString().trim();
@@ -165,12 +165,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void handlekoneksilogin(final String editText_email, final String editText_password) {
 
-        ProgressBar bola = findViewById(R.id.login_progress);
-        Button login = findViewById(R.id.button_login);
-
-        bola.setVisibility(View.VISIBLE);
-        login.setVisibility(View.GONE);
-
         JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.put("email", editText_email);
@@ -189,6 +183,8 @@ public class LoginActivity extends AppCompatActivity {
                     String success = jObj.getString("success");
 
                     if (success.equals("1")) {
+                        ProgressBar bola = findViewById(R.id.login_progress);
+                        bola.setVisibility(View.VISIBLE);
 
                         JSONObject user = jObj.getJSONObject("users");
                         String name = user.getString("name");
