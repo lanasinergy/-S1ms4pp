@@ -28,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.project.simsandroid.DetailActivity;
 import com.example.project.simsandroid.HomeActivity;
 import com.example.project.simsandroid.R;
 import com.example.project.simsandroid.adapter.LeadRegisterAdapter;
@@ -230,14 +231,15 @@ public class HomeFragment extends Fragment implements LeadRegisterAdapter.ILeadA
 
     @Override
     public void doClick(int pos) {
-        Intent intent = new Intent(getContext(), HomeActivity.class);
+        Intent intent = new Intent(getContext(), DetailActivity.class);
+        intent.putExtra(LEADS1, leadsAdapter.getItem(pos));
         intent.putExtra("get_id", "id");
         startActivity(intent);
     }
 
     @Override
     public void doEdit(int pos) {
-        
+
     }
 
     @Override
