@@ -1,6 +1,5 @@
 package com.example.project.simsandroid.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project.simsandroid.R;
 import com.example.project.simsandroid.data.model.Leads;
+import com.example.project.simsandroid.ui.home.HomeFragment;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -24,18 +24,14 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
     ILeadAdapter mILeadAdapter;
     Locale localeID = new Locale("in", "ID");
     NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
-    private Context context;
+    private HomeFragment context;
 
-//    public LeadRegisterAdapter(Context context1, List<Leads> lList, LeadRegisterAdapter.ILeadAdapter MLeadAdapter) {
-//
-//    }
-
-    public LeadRegisterAdapter(List<Leads> lList, ILeadAdapter MLeadAdapter, Context context1) {
+    public LeadRegisterAdapter(HomeFragment context, List<Leads> lList) {
         super();
-        context = context1;
+        this.context = context;
         this.Leadlist = lList;
         this.filteredNameList = lList;
-        mILeadAdapter = MLeadAdapter;
+        mILeadAdapter = context;
     }
 
     @Override
@@ -48,12 +44,7 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
         holder.tvContact.setText(lead.getId_customer());
         holder.etClosing_date.setText(lead.getClosing_date());
         holder.tvStatus.setText(lead.getResult());
-        if (!lead.getAmount().isEmpty()) {
-            holder.tvamount.setText(formatRupiah.format(Integer.parseInt(lead.getAmount())));
-        } else {
-            holder.tvamount.setText(formatRupiah.format(Integer.parseInt(lead.getAmount())));
-        }
-
+        holder.tvamount.setText(formatRupiah.format(Integer.valueOf(lead.getAmount())));
         holder.tvinfo.setText(lead.getInfo());
         if (lead.getResult() == "OPEN") {
             holder.ivAssign.setVisibility(View.VISIBLE);
@@ -66,7 +57,6 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_item_list, parent, false);
         return new ViewHolder(view);
-
     }
 
     @Override
@@ -77,11 +67,6 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
     //buat position dinamis
     public Leads getItem(int position) {
         return Leadlist.get(position);
-    }
-
-    public void filterList(ArrayList<Leads> filteredList) {
-        Leadlist = filteredList;
-        notifyDataSetChanged();
     }
 
     public interface ILeadAdapter {
@@ -131,5 +116,10 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
             tvinfo = itemView.findViewById(R.id.minfo);
 
         }
+    }
+
+    public void filterList(ArrayList<Leads> filteredList) {
+        Leadlist = filteredList;
+        notifyDataSetChanged();
     }
 }

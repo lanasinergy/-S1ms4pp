@@ -1,46 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
+    android:background="#F3F3F3"
     android:orientation="vertical"
-    android:padding="10dp">
+    tools:context="ui.home.AddLeadFragment">
 
-    <EditText
-        android:id="@+id/lead_id"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/bg_lead"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp">
 
-    <TextView
-        android:id="@+id/view_presales"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:maxLines="1"
-        android:text="Owner"
-        android:textColor="#60CEFF"
-        android:textSize="10dp" />
+        <TextView
+            android:id="@+id/textview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:text="Add Lead Register"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edit_lead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="30dp"
+            android:text="Lead"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/view_sales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="20dp"
+            android:maxLines="1"
+            android:text="Owner"
+            android:textColor="#60CEFF"
+            android:textSize="10dp" />
 
 
-    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-        android:id="@+id/spinner_presales"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="0dp"
-        android:background="@drawable/back"
-        android:ems="10"
-        app:hintText="Select Owner" />
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/spinner_sales"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/back"
+            android:padding="10dp"
+            android:pointerIcon="arrow"
+            app:hintText="Select Owner" />
 
-    <Button
-        android:id="@+id/btn_presales"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorPrimary"
-        android:text="SUBMIT"
-        android:textColor="#ffff" />
+        <TextView
+            android:id="@+id/view_contact"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="5dp"
+            android:maxLines="1"
+            android:text="Customer (Brand Name)"
+            android:textColor="#60CEFF"
+            android:textSize="10dp" />
 
-</LinearLayout>
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/spinner_contact"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/back"
+            android:padding="10dp"
+            app:hintText="Select Customer" />
+
+        <TextView
+            android:id="@+id/textview_oppty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="10dp"
+            android:text="Opportunity Name"
+            android:textColor="#60CEFF"
+            android:textSize="10dp" />
+
+        <EditText
+            android:id="@+id/textview_enter_oppty"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/back"
+            android:hint="Enter opportunity name"
+            android:padding="15dp"
+            android:textColor="#A1A1A1"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/textview_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="10dp"
+            android:text="Amount"
+            android:textColor="#60CEFF"
+            android:textSize="10dp" />
+
+        <EditText
+            android:id="@+id/edittext_enter_amount"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/back"
+            android:drawableLeft="@drawable/rp"
+            android:drawablePadding="5dp"
+            android:hint="Enter amount"
+            android:inputType="numberDecimal"
+            android:paddingLeft="15dp"
+            android:textColor="#A1A1A1"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/textview_close_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="10dp"
+            android:text="Close Date"
+            android:textColor="#60CEFF"
+            android:textSize="10dp" />
+
+        <EditText
+            android:id="@+id/edittext_select_date"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/back"
+            android:clickable="true"
+            android:drawableLeft="@drawable/calendar_img"
+            android:drawablePadding="5dp"
+            android:focusable="false"
+            android:hint="Select date"
+            android:paddingLeft="15dp"
+            android:textColor="#A1A1A1"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/textview_optional"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="10dp"
+            android:text="*optional"
+            android:textColor="#A1A1A1"
+            android:textSize="8dp" />
+
+        <EditText
+            android:id="@+id/edittext_info"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/back"
+            android:hint="Enter information"
+            android:inputType="text"
+            android:padding="15dp"
+            android:textColor="#A1A1A1"
+            android:textSize="13dp" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/button_submit"
+            android:hint="Submit"
+            android:textColorHint="@android:color/white" />
+
+        <Button
+            android:id="@+id/btn_edit"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="6dp"
+            android:background="#f7e127"
+            android:hint="Update"
+            android:textColorHint="@android:color/white"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

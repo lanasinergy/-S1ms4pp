@@ -1,6 +1,7 @@
 package com.example.project.simsandroid.ui.home;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.project.simsandroid.HomeActivity;
 import com.example.project.simsandroid.R;
 import com.example.project.simsandroid.adapter.LeadRegisterAdapter;
 import com.example.project.simsandroid.data.model.Leads;
@@ -79,11 +81,11 @@ public class HomeFragment extends Fragment implements LeadRegisterAdapter.ILeadA
 //            }
 //        });
 
-        mopp = root.findViewById(R.id.opty_name);
+//        mopp = root.findViewById(R.id.opty_name);
         mstatus = root.findViewById(R.id.mStatus);
         searchText = root.findViewById(R.id.search_view);
         mAmount = root.findViewById(R.id.maamount);
-        btnPresales = root.findViewById(R.id.btn_presales);
+//        btnPresales = root.findViewById(R.id.btn_presales);
         ivAssign = root.findViewById(R.id.iv_assign);
 
         tampilkanlead();
@@ -92,9 +94,8 @@ public class HomeFragment extends Fragment implements LeadRegisterAdapter.ILeadA
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        leadsAdapter = new LeadRegisterAdapter(lList, this, getActivity());
+        leadsAdapter = new LeadRegisterAdapter(this, lList);
         recyclerView.setAdapter(leadsAdapter);
-        //error syad
 
         SalesName = new ArrayList<String>();
         ContactName = new ArrayList<String>();
@@ -117,16 +118,7 @@ public class HomeFragment extends Fragment implements LeadRegisterAdapter.ILeadA
                 filter(s.toString());
             }
         });
-        //iku maeng error e guduk iku, error e iki
-        // opo o kok nyeluk iki
-        //iku fabutton e null ngno a?
-        //comment sek ae ndapopo
-        //yo ndang
-        //oalah tapi maeng amu ngganti sg getContext dadi getActivity baru iso
 
-        //ogak din, eh mbuh ding. soale error sng adapter iku pas hpmu sng sijine, gusuk hpe seng  iki
-        // log e sek nyantol
-        //tak dudui sg mok
         fabutton = root.findViewById(R.id.fab);
         fabutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,6 +147,9 @@ public class HomeFragment extends Fragment implements LeadRegisterAdapter.ILeadA
 //        Intent intent = new Intent(LeadRegister.this, AddLeadActivity.class);
 //        intent.putExtra("addlead", "coba");
 //        startActivity(intent);
+        Intent intent = new Intent(getContext(), HomeActivity.class);
+        intent.putExtra("newLead", "new_lead");
+        startActivity(intent);
     }
 
     private void tampilkanlead() {
@@ -202,7 +197,7 @@ public class HomeFragment extends Fragment implements LeadRegisterAdapter.ILeadA
                                 item.setId_customer(o.getString("customer_legal_name"));
                                 item.setClosing_date(o.getString("closing_dates"));
                                 item.setResult(o.getString("results"));
-                                item.setAmount(o.getString("amounts"));
+                                item.setAmount(o.getInt("amounts"));
                                 lList.add(item);
                                 Log.i(item.getResult(), "onResponse: ");
                             }
@@ -235,12 +230,14 @@ public class HomeFragment extends Fragment implements LeadRegisterAdapter.ILeadA
 
     @Override
     public void doClick(int pos) {
-
+        Intent intent = new Intent(getContext(), HomeActivity.class);
+        intent.putExtra("get_id", "id");
+        startActivity(intent);
     }
 
     @Override
     public void doEdit(int pos) {
-
+        
     }
 
     @Override

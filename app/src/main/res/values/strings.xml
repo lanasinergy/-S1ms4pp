@@ -29,4 +29,21 @@
     <string name="menu_send">Send</string>
     <string name="logout">Logout</string>
     <string name="menu_lead_register">Lead Register</string>
+
+    <string-array name="priority">
+        <item>Choose Priority</item>
+        <item>Contribute</item>
+        <item>Fight</item>
+        <item>Foot Print</item>
+        <item>Guided</item>
+    </string-array>
+    <string-array name="project_size">
+        <item>Choose Project Size</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Advance</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
