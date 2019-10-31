@@ -3,6 +3,7 @@ package com.example.project.simsandroid.ui.home;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -21,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,6 +34,7 @@ import com.example.project.simsandroid.DetailActivity;
 import com.example.project.simsandroid.HomeActivity;
 import com.example.project.simsandroid.R;
 import com.example.project.simsandroid.adapter.LeadRegisterAdapter;
+import com.example.project.simsandroid.coba_coba;
 import com.example.project.simsandroid.data.model.Leads;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -39,9 +42,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import util.Server;
@@ -50,15 +55,18 @@ public class HomeFragment extends Fragment implements LeadRegisterAdapter.ILeadA
 
     private HomeViewModel homeViewModel;
 
+    SwipeRefreshLayout swipeRefreshLayout;
+
     public static final String LEADS1 = "leads";
     public static final int REQUEST_CODE_EDIT = 99;
+    ArrayList<Integer> total_amount = new ArrayList<>();
     public static String lead_id;
     public static String name_sales;
     public List<Leads> lList = new ArrayList<>();
     public List<String> SalesName, ContactName, PresalesName;
     ProgressBar progresslead;
     Spinner spinContact, spinnSales, spinPresales;
-    TextView mName, mEmail, mlead, mopp, mcoba, mstatus, mAmount, tvLead, ivAssign;
+    TextView mName, mEmail, mlead, mopp, mcoba, mstatus, mAmount, tvLead, ivAssign, tvTAmount;
     LeadRegisterAdapter leadsAdapter;
     Button btnAddlead, btnPresales;
     ArrayAdapter<String> SpinnerAdapter;
@@ -67,6 +75,8 @@ public class HomeFragment extends Fragment implements LeadRegisterAdapter.ILeadA
     FloatingActionButton fabutton;
     String cek_status;
     int itemPos;
+    Locale localeID = new Locale("in", "ID");
+    NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -74,6 +84,23 @@ public class HomeFragment extends Fragment implements LeadRegisterAdapter.ILeadA
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        swipeRefreshLayout = root.findViewById(R.id.swipe_home);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+        });
+
 //        final TextView textView = root.findViewById(R.id.text_home);
 //        homeViewModel.getText().observe(this, new Observer<String>() {
 //            @Override
@@ -88,6 +115,7 @@ public class HomeFragment extends Fragment implements LeadRegisterAdapter.ILeadA
         mAmount = root.findViewById(R.id.maamount);
 //        btnPresales = root.findViewById(R.id.btn_presales);
         ivAssign = root.findViewById(R.id.iv_assign);
+        tvTAmount = root.findViewById(R.id.total_amount);
 
         tampilkanlead();
 
@@ -134,20 +162,20 @@ public class HomeFragment extends Fragment implements LeadRegisterAdapter.ILeadA
 
     private void filter(String s) {
         ArrayList<Leads> filteredList = new ArrayList<>();
-
+        int total2 = 0;
         for (Leads item : lList) {
-            if (item.getLead_id().toLowerCase().contains(s.toLowerCase())) {
+            if (item.getLead_id().toLowerCase().contains(s.toLowerCase()) || item.getNik().toLowerCase().contains(s.toLowerCase()) ||
+                    item.getResult().toLowerCase().contains(s.toLowerCase()) || item.getOpp_name().toLowerCase().contains(s.toLowerCase())) {
                 filteredList.add(item);
+                total_amount.add(item.getAmount());
+                total2 += item.getAmount();
             }
         }
-
+        tvTAmount.setText(formatRupiah.format(total2));
         leadsAdapter.filterList(filteredList);
     }
 
     private void addlead() {
-//        Intent intent = new Intent(LeadRegister.this, AddLeadActivity.class);
-//        intent.putExtra("addlead", "coba");
-//        startActivity(intent);
         Intent intent = new Intent(getContext(), HomeActivity.class);
         intent.putExtra("newLead", "new_lead");
         startActivity(intent);
@@ -189,6 +217,7 @@ public class HomeFragment extends Fragment implements LeadRegisterAdapter.ILeadA
                         Log.i("response", String.valueOf(jray.length()));
 
                         if (response.length() > 0) {
+                            int total2 = 0;
                             for (int i = 0; i < jray.length(); i++) {
                                 JSONObject o = jray.getJSONObject(i);
                                 Leads item = new Leads();
@@ -199,8 +228,13 @@ public class HomeFragment extends Fragment implements LeadRegisterAdapter.ILeadA
                                 item.setClosing_date(o.getString("closing_dates"));
                                 item.setResult(o.getString("results"));
                                 item.setAmount(o.getInt("amounts"));
+
+                                total_amount.add(o.getInt("amounts"));
+                                total2 += total_amount.get(i);
+                                tvTAmount.setText(formatRupiah.format(total2));
+
                                 lList.add(item);
-                                Log.i(item.getResult(), "onResponse: ");
+                                Log.i(String.valueOf(o.getInt("amounts")), "onResponse: ");
                             }
                             leadsAdapter.notifyDataSetChanged();
                         }
@@ -239,11 +273,25 @@ public class HomeFragment extends Fragment implements LeadRegisterAdapter.ILeadA
 
     @Override
     public void doEdit(int pos) {
-
+        itemPos = pos;
+        Intent intent = new Intent(getContext(), HomeActivity.class);
+        intent.putExtra(LEADS1, leadsAdapter.getItem(pos));
+        intent.putExtra("get_id_edit", "id");
+        startActivityForResult(intent, REQUEST_CODE_EDIT);
     }
 
     @Override
     public void doAssign(int pos) {
+        Intent intent = new Intent(getContext(), coba_coba.class);
+        startActivity(intent);
+    }
+
+    private void assignPresales() {
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
     }
 }

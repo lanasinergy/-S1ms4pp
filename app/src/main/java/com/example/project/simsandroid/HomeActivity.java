@@ -20,12 +20,16 @@ public class HomeActivity extends AppCompatActivity implements AddLeadFragment.O
 
         String addlead = getIntent().getStringExtra("newLead");
         String detaillead = getIntent().getStringExtra("get_id");
+        String edit = getIntent().getStringExtra("get_id_edit");
         if (addlead != null) {
             Fragment androidFragment = new AddLeadFragment();
             replaceFragment(androidFragment);
         } else if (detaillead != null) {
             Fragment androidFragment2 = new DetailLeadFragment();
             replaceFragment(androidFragment2);
+        } else if (edit != null) {
+            Fragment androidFragment3 = new AddLeadFragment();
+            replaceFragment(androidFragment3);
         }
     }
 

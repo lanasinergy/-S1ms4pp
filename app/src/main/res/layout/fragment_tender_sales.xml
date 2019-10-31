@@ -1,14 +1,256 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".ui.home.TenderSalesFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:ignore="MissingConstraints">
+
+            <EditText
+                android:id="@+id/edit_lead_id_fragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textview_no_doc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="295dp"
+                android:text="No Doc. Lelang"
+                android:textColor="#60CEFF"
+                android:textSize="9dp" />
+
+            <EditText
+                android:id="@+id/edittext_no_doc"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="310dp"
+                android:background="@drawable/border"
+                android:hint="Enter no doc. lelang"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textColor="#A1A1A1"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/textview_submit_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="365dp"
+                android:text="Submitted Price"
+                android:textColor="#60CEFF"
+                android:textSize="9dp" />
+
+            <EditText
+                android:id="@+id/edittext_submit_price"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="380dp"
+                android:background="@drawable/border"
+                android:drawableLeft="@drawable/rp"
+                android:drawablePadding="3dp"
+                android:hint="Enter submitted price"
+                android:inputType="numberDecimal"
+                android:paddingLeft="10dp"
+                android:textColor="#A1A1A1"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/textview_class"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="435dp"
+                android:text="Project Class"
+                android:textColor="#60CEFF"
+                android:textSize="9dp" />
+
+            <Spinner
+                android:id="@+id/spinner_project_class"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="450dp"
+                android:background="@drawable/border"
+                android:entries="@array/project_class"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textColor="#A1A1A1"
+                android:textSize="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="497dp"
+                android:text="Current Project Size:"
+                android:textSize="9dp" />
+
+            <TextView
+                android:id="@+id/tvproject_class"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="88dp"
+                android:layout_marginTop="497dp"
+                android:textSize="9dp" />
+
+            <TextView
+                android:id="@+id/textview_deal_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="515dp"
+                android:text="Deal Price"
+                android:textColor="#60CEFF"
+                android:textSize="9dp" />
+
+            <EditText
+                android:id="@+id/edittext_deal_price"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="530dp"
+                android:background="@drawable/border"
+                android:drawableLeft="@drawable/rp"
+                android:drawablePadding="3dp"
+                android:hint="Enter deal price"
+                android:inputType="numberDecimal"
+                android:padding="10dp"
+                android:textColor="#A1A1A1"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/textview_probability"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="585dp"
+                android:text="Win Probability"
+                android:textColor="#60CEFF"
+                android:textSize="9dp" />
+
+
+            <Spinner
+                android:id="@+id/spinner_win_prob"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="600dp"
+                android:background="@drawable/border"
+                android:entries="@array/win_prob"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textColor="#A1A1A1"
+                android:textSize="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="647dp"
+                android:text="Current Win Porbability:"
+                android:textSize="9dp" />
+
+            <TextView
+                android:id="@+id/tvwin_prob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="647dp"
+                android:textSize="9dp" />
+
+            <TextView
+                android:id="@+id/textview_project_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="665dp"
+                android:text="Project Name"
+                android:textColor="#60CEFF"
+                android:textSize="9dp" />
+
+            <EditText
+                android:id="@+id/edittext_project_name"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="680dp"
+                android:background="@drawable/border"
+                android:hint="Enter project name"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textColor="#A1A1A1"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/textview_submit_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="735dp"
+                android:text="Submit Date"
+                android:textColor="#60CEFF"
+                android:textSize="9dp" />
+
+            <EditText
+                android:id="@+id/edittext_submit_date"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="750dp"
+                android:background="@drawable/border"
+                android:clickable="true"
+                android:drawableLeft="@drawable/calendar_img"
+                android:drawablePadding="3dp"
+                android:focusable="false"
+                android:hint="Select date"
+                android:inputType="text"
+                android:padding="10dp"
+                android:paddingLeft="20dp"
+                android:textColor="#A1A1A1"
+                android:textSize="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="810dp"
+                android:text="Quote Number"
+                android:textColor="#60CEFF"
+                android:textSize="9dp" />
+
+            <EditText
+                android:id="@+id/edittext_quote"
+                android:layout_width="350dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="825dp"
+                android:background="@drawable/border"
+                android:hint="Enter Quote Number"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textColor="#A1A1A1"
+                android:textSize="12dp" />
+
+            <Button
+                android:id="@+id/btn_submit_tp"
+                android:layout_width="67dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="900dp"
+                android:background="@color/colorAccent"
+                android:hint="Submit"
+                android:textColorHint="@android:color/white" />
+
+            <Button
+                android:id="@+id/btn_result"
+                android:layout_width="67dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="280dp"
+                android:layout_marginTop="900dp"
+                android:background="@color/colorPrimary"
+                android:hint="Result"
+                android:textColorHint="@android:color/white" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
