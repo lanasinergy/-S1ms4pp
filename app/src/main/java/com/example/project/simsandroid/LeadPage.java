@@ -29,6 +29,7 @@ public class LeadPage extends AppCompatActivity implements NavigationView.OnNavi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lead_page);
 
+        //Untuk session login
         preferenceConfig = new SharedPreferenceConfig(getApplicationContext());
 
         Toolbar toolbar = findViewById(R.id.toolbar);
