@@ -13,4 +13,5 @@ public class Server {
     public static final String URL_tampil_tp = "http://192.168.2.142/api/tampil_tp";
     public static final String URL_update_result = "http://192.168.2.142/api/update_result";
     public static final String URL_detail_lead = "http://192.168.2.142/api/detail_lead";
+    public static final String URL_pie_chart = "http://192.168.2.142/api/dashboard";
 }

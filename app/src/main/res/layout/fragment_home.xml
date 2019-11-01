@@ -8,6 +8,13 @@
     android:layout_gravity="center_vertical"
     android:orientation="vertical">
 
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" />
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -35,11 +42,12 @@
             android:layout_marginLeft="100dp"
             android:layout_marginTop="60dp"
             android:padding="16dp"
-            android:text="Rp. 10000000" />
+            android:text="Rp.0" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_marginTop="100dp"
         android:id="@+id/swipe_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -69,6 +77,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:src="@drawable/ic_add_black_24dp"
-        app:backgroundTint="@color/colorPrimaryDark" />
+        app:backgroundTint="@color/colorPrimary" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

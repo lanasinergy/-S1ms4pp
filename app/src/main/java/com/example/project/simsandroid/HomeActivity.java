@@ -2,6 +2,8 @@ package com.example.project.simsandroid;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -12,6 +14,7 @@ import com.example.project.simsandroid.ui.home.AddLeadFragment;
 import com.example.project.simsandroid.ui.home.DetailLeadFragment;
 
 public class HomeActivity extends AppCompatActivity implements AddLeadFragment.OnFragmentInteractionListener, DetailLeadFragment.OnFragmentInteractionListener {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
