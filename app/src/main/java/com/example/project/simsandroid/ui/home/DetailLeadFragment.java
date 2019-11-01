@@ -27,6 +27,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.baoyachi.stepview.HorizontalStepView;
 import com.baoyachi.stepview.bean.StepBean;
+import com.example.project.simsandroid.DetailActivity;
 import com.example.project.simsandroid.R;
 import com.example.project.simsandroid.data.model.Leads;
 
@@ -293,7 +294,7 @@ public class DetailLeadFragment extends Fragment {
                     success = jObj.getString("success");
 
                     if (success.equals("1")) {
-                        Intent intent = new Intent(getActivity(), HomeFragment.class);
+                        Intent intent = new Intent(getActivity(), DetailActivity.class);
                         Toast.makeText(getActivity(), "Solution Design Updated Successfully :)", Toast.LENGTH_LONG).show();
                         startActivity(intent);
 

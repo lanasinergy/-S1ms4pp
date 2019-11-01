@@ -1,5 +1,6 @@
 package com.example.project.simsandroid.ui.home;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,9 +17,12 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +36,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.project.simsandroid.DetailActivity;
 import com.example.project.simsandroid.HomeActivity;
+import com.example.project.simsandroid.LeadPage;
 import com.example.project.simsandroid.R;
 import com.example.project.simsandroid.adapter.LeadRegisterAdapter;
 import com.example.project.simsandroid.coba_coba;
@@ -282,12 +287,113 @@ public class HomeFragment extends Fragment implements LeadRegisterAdapter.ILeadA
 
     @Override
     public void doAssign(int pos) {
-        Intent intent = new Intent(getContext(), coba_coba.class);
-        startActivity(intent);
+        PresalesName = new ArrayList<String>();
+
+        itemPos = pos;
+        Leads lead = leadsAdapter.getItem(pos);
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+        View mView = getLayoutInflater().inflate(R.layout.add_lead, null);
+        mBuilder.setView(mView);
+
+        spinPresales = mView.findViewById(R.id.spinner_presales);
+        btnPresales = mView.findViewById(R.id.btn_presales);
+        tvLead = mView.findViewById(R.id.lead_id);
+
+
+        tvLead.setText(lead.getLead_id());
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        final JSONObject jobj = new JSONObject();
+        final String presales = null;
+        try {
+            jobj.put("presales", presales);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.GET, Server.URL_Lead, jobj, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Log.i("response", response.toString());
+                    JSONObject jObj = response;
+                    String success = jObj.getString("success");
+                    if (success.equals("1")) {
+                        JSONArray jray_lead = jObj.getJSONArray("lead");
+                        JSONArray jray_presales = jObj.getJSONArray("presales_list");
+                        if (response.length() > 0) {
+
+
+                            for (int i = 0; i < jray_presales.length(); i++) {
+                                JSONObject presales = jray_presales.getJSONObject(i);
+                                String presaleses = presales.getString("name");
+                                PresalesName.add(presaleses);
+
+                            }
+                            Log.i(jray_presales.toString(), "onResponse: ");
+                            spinPresales.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, PresalesName));
+
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(strReq);
+
+        btnPresales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                assignPresales();
+                dialog.dismiss();
+            }
+        });
     }
 
     private void assignPresales() {
+        final String presales = spinPresales.getSelectedItem().toString().trim();
+        String lead_id = tvLead.getText().toString().trim();
 
+        final JSONObject jobj = new JSONObject();
+        try {
+            jobj.put("spinner_presales", presales);
+            jobj.put("lead_id", lead_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_assign, jobj, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.i("response", response.toString());
+                JSONObject jObj = response;
+
+                /*Intent intent = new Intent(getActivity(), LeadPage.class);
+                Toast.makeText(getActivity(), "Successfully Add Presales", Toast.LENGTH_LONG).show();
+                startActivity(intent);*/
+                Toast.makeText(getContext(), "Successfully Add Presales", Toast.LENGTH_LONG).show();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(strReq);
     }
 
     @Override

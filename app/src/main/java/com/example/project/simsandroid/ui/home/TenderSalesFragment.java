@@ -28,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.project.simsandroid.DetailActivity;
 import com.example.project.simsandroid.R;
 import com.example.project.simsandroid.data.model.Leads;
 
@@ -184,7 +185,7 @@ public class TenderSalesFragment extends Fragment {
                     success = jObj.getString("success");
 
                     if (success.equals("1")) {
-                        Intent intent = new Intent(getActivity(), HomeFragment.class);
+                        Intent intent = new Intent(getActivity(), DetailActivity.class);
                         Toast.makeText(getActivity(), "Update Result Successfully :)", Toast.LENGTH_LONG).show();
                         startActivity(intent);
 
