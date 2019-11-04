@@ -21,8 +21,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,10 +34,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.project.simsandroid.DetailActivity;
 import com.example.project.simsandroid.HomeActivity;
-import com.example.project.simsandroid.LeadPage;
 import com.example.project.simsandroid.R;
 import com.example.project.simsandroid.adapter.LeadRegisterAdapter;
-import com.example.project.simsandroid.coba_coba;
 import com.example.project.simsandroid.data.model.Leads;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -270,10 +266,15 @@ public class HomeFragment extends Fragment implements LeadRegisterAdapter.ILeadA
 
     @Override
     public void doClick(int pos) {
-        Intent intent = new Intent(getContext(), DetailActivity.class);
-        intent.putExtra(LEADS1, leadsAdapter.getItem(pos));
-        intent.putExtra("get_id", "id");
-        startActivity(intent);
+        if (!leadsAdapter.getItem(pos).getResult().equalsIgnoreCase("INITIAL")) {
+            Intent intent = new Intent(getContext(), DetailActivity.class);
+            intent.putExtra(LEADS1, leadsAdapter.getItem(pos));
+            intent.putExtra("get_id", "id");
+            startActivity(intent);
+        } else {
+            Toast.makeText(getContext(), "Status Lead Initial", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override

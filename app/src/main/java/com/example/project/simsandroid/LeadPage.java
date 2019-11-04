@@ -2,7 +2,6 @@ package com.example.project.simsandroid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -10,16 +9,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.project.simsandroid.session.SharedPreferenceConfig;
-import com.example.project.simsandroid.ui.home.HomeFragment;
 import com.example.project.simsandroid.ui.login.LoginActivity;
 import com.google.android.material.navigation.NavigationView;
 
@@ -64,9 +60,9 @@ public class LeadPage extends AppCompatActivity implements NavigationView.OnNavi
 
         switch (item.getItemId()) {
 
-            case R.id.action_settings:
+            /*case R.id.action_settings:
                 Toast.makeText(LeadPage.this, "You click settings!", Toast.LENGTH_SHORT).show();
-                return true;
+                return true;*/
 
             case R.id.action_logout:
                 preferenceConfig.writeLoginStatus(false);
